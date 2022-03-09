@@ -1,0 +1,16 @@
+{
+  "name": "integra.do-node-test",
+  "version": "1.0.0",
+  "description": "Backend test (Node.js + MongoDB)",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Node.js",
+    "MongoDB"
+  ],
+  "author": "ElderSam",
+  "license": "MIT"
+}

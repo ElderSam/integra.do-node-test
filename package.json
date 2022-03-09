@@ -12,5 +12,8 @@
     "MongoDB"
   ],
   "author": "ElderSam",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.26.1"
+  }
 }

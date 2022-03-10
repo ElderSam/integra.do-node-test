@@ -34,7 +34,7 @@ populateDB = async (req, res) => {
 		});
 };
 
-createUniversity = (req, res) => {
+createUniversity = async (req, res) => {
 	const body = req.body;
 
 	if (!body) {
@@ -50,37 +50,51 @@ createUniversity = (req, res) => {
 		return res.status(400).json({ success: false, error: err });
 	}
 
-	university
-		.save()
-		.then(() => {
-			return res.status(201).json({
-				success: true,
-				id: university._id,
-				message: "University created!",
-			});
-		})
-		.catch((error) => {
-			return res.status(400).json({
-				error,
-				message: "University not created!",
-			});
+	const { name, country } = university;
+	const alreadyExists = await University.findOne({
+		name,
+		country,
+		"state-province": university["state-province"],
+	});
+
+	if (alreadyExists) {
+		return res.status(409).json({
+			success: false,
+			error: "there is already a record registered with the same; name, country & state-province",
 		});
+	} else {
+		university
+			.save()
+			.then(() => {
+				return res.status(201).json({
+					success: true,
+					id: university._id,
+					message: "University created!",
+				});
+			})
+			.catch((error) => {
+				return res.status(400).json({
+					error,
+					message: "University not created!",
+				});
+			});
+	}
 };
 
 getUniversityById = async (req, res) => {
-    await University.findOne({ _id: req.params.id }, (err, university) => {
-        if (err) {
-            return res.status(400).json({ success: false, error: err })
-        }
+	await University.findOne({ _id: req.params.id }, (err, university) => {
+		if (err) {
+			return res.status(400).json({ success: false, error: err });
+		}
 
-        if (!university) {
-            return res
-                .status(404)
-                .json({ success: false, error: `University not found` })
-        }
-        return res.status(200).json({ success: true, data: university })
-    }).catch(err => console.log(err))
-}
+		if (!university) {
+			return res
+				.status(404)
+				.json({ success: false, error: `University not found` });
+		}
+		return res.status(200).json({ success: true, data: university });
+	}).catch((err) => console.log(err));
+};
 
 getUniversities = async (req, res) => {
 	const { country } = req.query;
@@ -108,7 +122,7 @@ getUniversities = async (req, res) => {
 
 	await University.find(filterQuery)
 		.limit(perPage)
-		.skip(perPage * (page > 0 ? (page - 1) : 0))
+		.skip(perPage * (page > 0 ? page - 1 : 0))
 		.setOptions({ sanitizeFilter: true })
 
 		.then((universities) => {
@@ -132,7 +146,7 @@ getUniversities = async (req, res) => {
 			return res.status(200).json({
 				success: true,
 				limit: 20,
-                page: (page !== 0 ? page : 1),
+				page: page !== 0 ? page : 1,
 				totalInPage: response.length,
 				data: response,
 			});
@@ -146,7 +160,7 @@ getUniversities = async (req, res) => {
 module.exports = {
 	populateDB,
 
-    createUniversity,
-    getUniversityById,
+	createUniversity,
+	getUniversityById,
 	getUniversities,
 };

@@ -35,7 +35,26 @@ populateDB = async (req, res) => {
 };
 
 getUniversities = async (req, res) => {
-	await University.find({}, (err, universities) => {
+    const { country } = req.query;
+    // console.log('req.params: ', req.query)
+
+    const filterQuery = {}
+
+    if(country) {
+        let auxCountry
+
+        if(country === 'brazil') {
+            auxCountry = 'Brasil'
+        } else {
+            auxCountry = country.charAt(0).toUpperCase() + country.slice(1);
+        }
+
+        filterQuery.country = auxCountry
+    }
+
+    console.log('filterQuery: ', filterQuery)
+
+    await University.find(filterQuery, (err, universities) => {
 		if (err) {
 			return res.status(400).json({ success: false, error: err });
 		}
@@ -56,7 +75,9 @@ getUniversities = async (req, res) => {
 			total: response.length,
 			data: response,
 		});
-	}).catch((err) => console.log(err));
+	})
+    .setOptions({ sanitizeFilter: true })
+    .catch((err) => console.log(err));
 };
 
 module.exports = {

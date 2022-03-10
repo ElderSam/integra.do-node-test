@@ -1,7 +1,12 @@
 const mongoose = require("mongoose");
 
+console.log('mongo URI: ', process.env.MONGO_URI)
+
 mongoose
-	.connect("mongodb://127.0.0.1:27017/cinema", { useNewUrlParser: true })
+	.connect(process.env.MONGO_URI, { useNewUrlParser: true })
+	.then(() => {
+		console.log("✔️  MongoDB database started!")
+	})
 	.catch((e) => {
 		console.error("Connection error", e.message);
 	});

@@ -6,11 +6,18 @@ const routes = require("./routes");
 
 class AppController {
     constructor() {
+        this.initalizeDB();
+
         this.app = express();
 
         this.configs()
         this.middlewares()
         this.routes()
+    }
+
+    initalizeDB() {
+        this.db = require('./db')
+        this.db.on('error', console.error.bind(console, 'MongoDB connection error:'))
     }
 
     configs() {

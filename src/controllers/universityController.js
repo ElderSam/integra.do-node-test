@@ -81,6 +81,44 @@ createUniversity = async (req, res) => {
 	}
 };
 
+updateUniversity = async (req, res) => {
+    const body = req.body
+
+    if (!body) {
+        return res.status(400).json({
+            success: false,
+            error: 'You must provide a body to update',
+        })
+    }
+
+    University.findOne({ _id: req.params.id }, (err, university) => {
+        if (err) {
+            return res.status(404).json({
+                err,
+                message: 'University not found!',
+            })
+        }
+        university.name = body.name
+        university.domains = body.domains
+        university.web_pages = body.web_pages
+        university
+            .save()
+            .then(() => {
+                return res.status(200).json({
+                    success: true,
+                    id: university._id,
+                    message: 'University updated!',
+                })
+            })
+            .catch(error => {
+                return res.status(404).json({
+                    error,
+                    message: 'University not updated!',
+                })
+            })
+    })
+}
+
 getUniversityById = async (req, res) => {
 	await University.findOne({ _id: req.params.id }, (err, university) => {
 		if (err) {
@@ -161,6 +199,7 @@ module.exports = {
 	populateDB,
 
 	createUniversity,
+    updateUniversity,
 	getUniversityById,
 	getUniversities,
 };

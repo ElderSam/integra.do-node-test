@@ -9,6 +9,8 @@ routes.get("/", (req, res) => {
 
 routes.get("/universities", async (req, res) => {
 	const data = await getAllUniversitiesData()
+	console.log("total responses: ", data.length);
+
 	res.send(data);
 });
 

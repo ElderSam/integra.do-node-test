@@ -21,18 +21,24 @@ async function getUniversitiesByCountry(country) {
 		.catch((err) => console.log(`Error! ${err}`));
 }
 
-const arrRequests = countries.map((country) => {
-	return getUniversitiesByCountry(country);
-});
-
-// console.log('arrRequests')
-// console.log(arrRequests)
-
 async function getAllUniversitiesData() {
-	const responses = await Promise.all(arrRequests);
-	console.log("total responses: ", responses.length);
+	const arrRequests = countries.map((country) => {
+		return getUniversitiesByCountry(country);
+	});
 
-	return responses;
+	const responses = await Promise.all(arrRequests);
+	// console.log("total Arr responses: ", responses.length);
+
+	// treat data
+	const getUniqueArray = (responses) => {
+		let newArr = [];
+		responses.forEach((subArr) => {
+			newArr = [...newArr, ...subArr];
+		});
+		return newArr;
+	};
+
+	return getUniqueArray(responses)
 }
 
 module.exports = { getAllUniversitiesData };

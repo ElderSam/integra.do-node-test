@@ -1,11 +1,20 @@
 # integra.do-node-test
 
 ## Start
-### install dependencies
-``$ yarn install``
+### With Docker
+Run commands;
 
-### run
-``$ yarn start``
+        "$ cd config/production" // enter in production folder
+        "$ docker-compose up" // build and and start containers
+
+### Without Docker
+Run commands;
+
+        install dependencies
+        "$ yarn install"
+
+        run
+        "$ yarn start:prod"
 
 --------------------------------
 
@@ -18,6 +27,9 @@
 
 -------------------------------
 ## Dockerizing
+[Ambiente de desenvolvimento NodeJS com Docker e Docker Compose](https://www.youtube.com/watch?v=AVNADGzXrrQ&list=PLmX5_ydv5jg-WRtaCb72IbYiuYvIacooR&index=5)
+[Docker Compose in 6 minutes! Mongo, Express, React, Node (MERN) Application Tutorial](https://www.youtube.com/watch?v=0B2raYYH2fE)
+
 1. create [Dockerfile](./Dockerfile) & .dockerignore
 
 2. [Build image](./Makefile)

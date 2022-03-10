@@ -25,6 +25,9 @@ Run commands;
 - [x] salvar estas informações no banco de dados.
         * Criar uma collection no MongoDB para armazenar as universidades separadamente.
 
+## PARTE 2
+- [x] criar uma API que viabilize um CRUD (create, retrieve, update, delete) das universidades anteriormente cadastradas no MongoDB.
+
 -------------------------------
 ## Tutorials & tips;
 
@@ -49,7 +52,3 @@ run "$ docker run -p [PORT]:[PORT] -d [YOUR_API_DOCKER_IMAGE]"
 
 example: docker run -p 5000:5000 -d api-server
 ```
-
----------
-
-### [How to create your first MERN (MongoDB, Express JS, React JS and Node JS) Stack](https://medium.com/swlh/how-to-create-your-first-mern-mongodb-express-js-react-js-and-node-js-stack-7e8b20463e66)

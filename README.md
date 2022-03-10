@@ -5,10 +5,11 @@
 Run commands;
 
         "$ cd config/production" // enter in production folder
-        "$ docker-compose up" // build and and start containers
+        "$ docker-compose up" // build and and start containers (node + mongoDB)
 
+----------------
 ### Without Docker
-Run commands;
+#### 1. Run commands;
 
         install dependencies
         "$ yarn install"
@@ -16,6 +17,12 @@ Run commands;
         run
         "$ yarn start:prod"
 
+#### 2. set mongoDB database
+
+#### 3. change .env files;
+```
+MONGO_URI='mongodb://localhost:27017/[YOUR_DB_NAME]'
+```
 --------------------------------
 
 ## PARTE 1

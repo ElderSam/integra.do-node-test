@@ -44,10 +44,17 @@ getUniversities = async (req, res) => {
 				.status(404)
 				.json({ success: false, error: `University not found` });
 		}
+
+        // return only some fields
+        const response = universities.map((university) => {
+            const { _id, name, country } = university
+            return { _id, name, country, "state-province": university['state-province'] }
+        })
+
 		return res.status(200).json({
 			success: true,
-			total: universities.length,
-			data: universities,
+			total: response.length,
+			data: response,
 		});
 	}).catch((err) => console.log(err));
 };

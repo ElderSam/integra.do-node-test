@@ -1,8 +1,5 @@
-const { getAllUniversitiesData } = require("./services/searchUniversities");
+const app = require('./app')
 
-async function main() {
-	const res = await getAllUniversitiesData();
-	console.log(res.length);
-}
+const PORT = process.env.PORT || 3000
 
-main();
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`))

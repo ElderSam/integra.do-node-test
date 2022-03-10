@@ -16,22 +16,23 @@ async function getUniversitiesByCountry(country) {
 		.get("/search", { params: { country } })
 		.then((res) => {
 			console.log(`Total ${country}: `, res.data.length);
-            return res.data
+			return res.data;
 		})
 		.catch((err) => console.log(`Error! ${err}`));
 }
 
 const arrRequests = countries.map((country) => {
-    return getUniversitiesByCountry(country)
-})
+	return getUniversitiesByCountry(country);
+});
 
 // console.log('arrRequests')
 // console.log(arrRequests)
 
 async function getAllUniversitiesData() {
-    const responses = await Promise.all(arrRequests)
-    console.log('total responses: ', responses.length)
+	const responses = await Promise.all(arrRequests);
+	console.log("total responses: ", responses.length);
+
 	return responses;
 }
 
-module.exports = { getAllUniversitiesData }
+module.exports = { getAllUniversitiesData };

@@ -6,6 +6,7 @@ const router = express.Router()
 
 router.get('/universities/populate-db', UniversityCtrl.populateDB)
 
+router.post('/universities', UniversityCtrl.createUniversity)
 router.get('/universities/:id', UniversityCtrl.getUniversityById)
 router.get('/universities', UniversityCtrl.getUniversities)
 

@@ -34,6 +34,39 @@ populateDB = async (req, res) => {
 		});
 };
 
+createUniversity = (req, res) => {
+	const body = req.body;
+
+	if (!body) {
+		return res.status(400).json({
+			success: false,
+			error: "You must provide a university",
+		});
+	}
+
+	const university = new University(body);
+
+	if (!university) {
+		return res.status(400).json({ success: false, error: err });
+	}
+
+	university
+		.save()
+		.then(() => {
+			return res.status(201).json({
+				success: true,
+				id: university._id,
+				message: "University created!",
+			});
+		})
+		.catch((error) => {
+			return res.status(400).json({
+				error,
+				message: "University not created!",
+			});
+		});
+};
+
 getUniversityById = async (req, res) => {
     await University.findOne({ _id: req.params.id }, (err, university) => {
         if (err) {
@@ -113,6 +146,7 @@ getUniversities = async (req, res) => {
 module.exports = {
 	populateDB,
 
+    createUniversity,
     getUniversityById,
 	getUniversities,
 };

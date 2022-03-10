@@ -24,13 +24,4 @@ Run commands;
 MONGO_URI='mongodb://localhost:27017/[YOUR_DB_NAME]'
 ```
 --------------------------------
-
-## PARTE 1
-- [x] varrer uma API que retorna todas as universidades contidas em cada país da lista fornecida
-        API: http://universities.hipolabs.com/search?country=[COUNTRY]
-
-- [x] salvar estas informações no banco de dados.
-        * Criar uma collection no MongoDB para armazenar as universidades separadamente.
-
-## PARTE 2
-- [x] criar uma API que viabilize um CRUD (create, retrieve, update, delete) das universidades anteriormente cadastradas no MongoDB.
+## [Veja a Documentação completa do projeto](https://nickel-name-fe9.notion.site/Teste-Integra-do-backend-c453ec2b24434f39a1ff039ed2e57ab9)

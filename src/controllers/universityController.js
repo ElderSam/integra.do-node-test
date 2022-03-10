@@ -119,6 +119,22 @@ updateUniversity = async (req, res) => {
     })
 }
 
+deleteUniversity = async (req, res) => {
+    await University.findOneAndDelete({ _id: req.params.id }, (err, university) => {
+        if (err) {
+            return res.status(400).json({ success: false, error: err })
+        }
+
+        if (!university) {
+            return res
+                .status(404)
+                .json({ success: false, error: `University not found` })
+        }
+
+        return res.status(200).json({ success: true, data: university })
+    }).catch(err => console.log(err))
+}
+
 getUniversityById = async (req, res) => {
 	await University.findOne({ _id: req.params.id }, (err, university) => {
 		if (err) {
@@ -200,6 +216,7 @@ module.exports = {
 
 	createUniversity,
     updateUniversity,
+    deleteUniversity,
 	getUniversityById,
 	getUniversities,
 };

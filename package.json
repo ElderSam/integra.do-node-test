@@ -4,6 +4,7 @@
   "description": "Backend test (Node.js + MongoDB)",
   "main": "src/server.js",
   "scripts": {
+    "dev": "nodemon .",
     "start": "node .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,6 +15,11 @@
   "author": "ElderSam",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.26.1"
+    "axios": "^0.26.1",
+    "body-parser": "^1.19.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "mongoose": "^6.2.5",
+    "nodemon": "^2.0.15"
   }
 }

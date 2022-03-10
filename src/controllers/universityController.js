@@ -34,6 +34,21 @@ populateDB = async (req, res) => {
 		});
 };
 
+getUniversityById = async (req, res) => {
+    await University.findOne({ _id: req.params.id }, (err, university) => {
+        if (err) {
+            return res.status(400).json({ success: false, error: err })
+        }
+
+        if (!university) {
+            return res
+                .status(404)
+                .json({ success: false, error: `University not found` })
+        }
+        return res.status(200).json({ success: true, data: university })
+    }).catch(err => console.log(err))
+}
+
 getUniversities = async (req, res) => {
 	const { country } = req.query;
 	// console.log('req.params: ', req.query)
@@ -98,5 +113,6 @@ getUniversities = async (req, res) => {
 module.exports = {
 	populateDB,
 
+    getUniversityById,
 	getUniversities,
 };

@@ -25,3 +25,6 @@ MONGO_URI='mongodb://localhost:27017/[YOUR_DB_NAME]'
 ```
 --------------------------------
 ## [Veja a Documentação completa do projeto](https://nickel-name-fe9.notion.site/Teste-Integra-do-backend-c453ec2b24434f39a1ff039ed2e57ab9)
+
+## Documentação da Api (rotas)
+Importe o JSON dentro de [documentation/api](./documentation/api/Insomnia_2022-03-10.json) para o Insomnia ou Postman

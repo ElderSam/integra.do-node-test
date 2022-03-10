@@ -34,6 +34,26 @@ populateDB = async (req, res) => {
 		});
 };
 
+getUniversities = async (req, res) => {
+	await University.find({}, (err, universities) => {
+		if (err) {
+			return res.status(400).json({ success: false, error: err });
+		}
+		if (!universities.length) {
+			return res
+				.status(404)
+				.json({ success: false, error: `University not found` });
+		}
+		return res.status(200).json({
+			success: true,
+			total: universities.length,
+			data: universities,
+		});
+	}).catch((err) => console.log(err));
+};
+
 module.exports = {
-	populateDB
+	populateDB,
+
+	getUniversities,
 };

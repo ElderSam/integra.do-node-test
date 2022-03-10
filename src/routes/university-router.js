@@ -6,4 +6,6 @@ const router = express.Router()
 
 router.get('/universities/populate-db', UniversityCtrl.populateDB)
 
+router.get('/universities', UniversityCtrl.getUniversities)
+
 module.exports = router
